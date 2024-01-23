@@ -13,18 +13,21 @@
 </template>
 
 <script>
-// import axios from 'axios'; // Uncomment this if you're making API calls
+import axios from "axios";
 
 export default {
 	data() {
 		return {
-			resumes: [], // This should be populated with data from your API
+			resumes: [],
 		};
 	},
-	// Uncomment the below method to fetch resumes from your API
-	// async created() {
-	//   const response = await axios.get(`${process.env.VUE_APP_API_URL}/resumes`);
-	//   this.resumes = response.data;
-	// }
+	async created() {
+		try {
+			const response = await axios.get(`${process.env.VUE_APP_API_URL}/resumes`);
+			this.resumes = response.data;
+		} catch (error) {
+			console.error("Error fetching resumes:", error);
+		}
+	},
 };
 </script>

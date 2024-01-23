@@ -1,11 +1,29 @@
 <template>
 	<div>
-		<h1>{{ resume._id ? "Edit" : "Create" }} Resume</h1>
-		<!-- Form for creating/editing a resume -->
+		<h1>{{ id ? "Edit" : "Create" }} Resume</h1>
+		<form @submit.prevent="handleSubmit">
+			<label for="name">Name:</label>
+			<input id="name" v-model="resume.name" type="text" />
+
+			<label for="summary">Summary:</label>
+			<textarea id="summary" v-model="resume.summary"></textarea>
+
+			<!-- Simplified; you might want to make this part more dynamic -->
+			<div v-for="(exp, index) in resume.workExperience" :key="index">
+				<label for="title">Title:</label>
+				<input id="title" v-model="exp.title" type="text" />
+
+				<!-- Repeat for other fields like company name, timeframe, etc. -->
+			</div>
+
+			<button type="submit">{{ id ? "Update" : "Create" }}</button>
+		</form>
 	</div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
 	props: {
 		id: String,
@@ -15,11 +33,31 @@ export default {
 			resume: {
 				name: "",
 				summary: "",
-				workExperience: [],
-				// Populate with resume data if editing
+				workExperience: [{ title: "", companyName: "", timeframe: "", description: "" }],
 			},
 		};
 	},
-	// Add methods to handle form submission
+	async created() {
+		if (this.id) {
+			try {
+				const response = await axios.get(`${process.env.VUE_APP_API_URL}/resumes/${this.id}`);
+				this.resume = response.data;
+			} catch (error) {
+				console.error("Error fetching resume:", error);
+			}
+		}
+	},
+	methods: {
+		async handleSubmit() {
+			if (this.id) {
+				// Update logic
+				await axios.put(`${process.env.VUE_APP_API_URL}/resumes/${this.id}`, this.resume);
+			} else {
+				// Create logic
+				await axios.post(`${process.env.VUE_APP_API_URL}/resumes`, this.resume);
+			}
+			this.$router.push("/");
+		},
+	},
 };
 </script>
