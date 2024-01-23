@@ -9,8 +9,18 @@
 			<textarea id="summary" v-model="resume.summary"></textarea>
 
 			<div v-for="(exp, index) in resume.workExperience" :key="index">
-				<label for="title">Title:</label>
+				<label for="title">Job Title:</label>
 				<input id="title" v-model="exp.title" type="text" />
+				<!-- Error checking TITLE -->
+				<!-- <p
+					v-if="
+						errors.workExperience &&
+						errors.workExperience[index] &&
+						errors.workExperience[index].title
+					"
+				>
+					{{ errors.workExperience[index].title }}
+				</p> -->
 
 				<label for="companyName">Company Name:</label>
 				<input id="companyName" v-model="exp.companyName" type="text" />
