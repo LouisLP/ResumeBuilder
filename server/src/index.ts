@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import { database } from "./config/database";
 import resumeRoutes from "./routes/resumeRoutes";
+import cors from "cors"; // Import CORS
 
 dotenv.config();
 
@@ -15,6 +16,7 @@ mongoose
 	.then(() => console.log("Connected to MongoDB"))
 	.catch((err) => console.error("Could not connect to MongoDB", err));
 
+app.use(cors()); // Enable CORS for all routes
 app.use(express.json()); // for parsing application/json
 
 app.get("/", (req: Request, res: Response) => {
