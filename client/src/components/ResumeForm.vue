@@ -8,12 +8,18 @@
 			<label for="summary">Summary:</label>
 			<textarea id="summary" v-model="resume.summary"></textarea>
 
-			<!-- Simplified; you might want to make this part more dynamic -->
 			<div v-for="(exp, index) in resume.workExperience" :key="index">
 				<label for="title">Title:</label>
 				<input id="title" v-model="exp.title" type="text" />
 
-				<!-- Repeat for other fields like company name, timeframe, etc. -->
+				<label for="companyName">Company Name:</label>
+				<input id="companyName" v-model="exp.companyName" type="text" />
+
+				<label for="timeframe">Timeframe:</label>
+				<input id="timeframe" v-model="exp.timeframe" type="text" />
+
+				<label for="description">Description:</label>
+				<textarea id="description" v-model="exp.description"></textarea>
 			</div>
 
 			<button type="submit">{{ id ? "Update" : "Create" }}</button>

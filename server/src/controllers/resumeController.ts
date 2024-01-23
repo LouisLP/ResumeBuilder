@@ -7,7 +7,8 @@ const createResume = async (req: Request, res: Response) => {
 		await newResume.save();
 		res.status(201).json(newResume);
 	} catch (error: any) {
-		res.status(400).json({ message: error.message });
+		console.error(error); // Log the error for debugging
+		res.status(400).json({ message: error.message, details: error.errors });
 	}
 };
 
