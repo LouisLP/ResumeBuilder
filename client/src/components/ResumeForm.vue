@@ -15,7 +15,12 @@
 
 				<!-- COMPANY NAME -->
 				<label for="companyName">Company Name:</label>
-				<input class="form-control my-2" id="companyName" v-model="exp.companyName" type="text" />
+				<input
+					class="form-control my-2"
+					id="companyName"
+					v-model="exp.companyName"
+					type="text"
+				/>
 
 				<!-- TIMEFRAME -->
 				<label for="timeframe">Timeframe:</label>
@@ -23,10 +28,24 @@
 
 				<!-- DESCRIPTION -->
 				<label for="description">Description:</label>
-				<textarea class="form-control my-2" id="description" v-model="exp.description"></textarea>
+				<textarea
+					class="form-control my-2"
+					id="description"
+					v-model="exp.description"
+				></textarea>
+
+				<button class="btn btn-danger btn-sm" @click="removeWorkExperience(index)">
+					Remove
+				</button>
 			</div>
 
-			<button class="btn btn-dark btn-lg my-2" type="submit">{{ id ? "Update" : "Create" }}</button>
+			<button class="btn btn-secondary btn-sm" @click="addWorkExperience">
+				Add Work Experience
+			</button>
+
+			<button class="btn btn-dark btn-lg my-2" type="submit">
+				{{ id ? "Update" : "Create" }}
+			</button>
 		</form>
 	</div>
 </template>
@@ -58,6 +77,17 @@ export default {
 		}
 	},
 	methods: {
+		addWorkExperience() {
+			this.resume.workExperience.push({
+				title: "",
+				companyName: "",
+				timeframe: "",
+				description: "",
+			});
+		},
+		removeWorkExperience(index) {
+			this.resume.workExperience.splice(index, 1);
+		},
 		async handleSubmit() {
 			if (this.id) {
 				// Update logic
