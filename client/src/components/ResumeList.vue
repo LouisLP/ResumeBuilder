@@ -22,7 +22,7 @@ export default {
 		};
 	},
 	async created() {
-        console.log('API URL:', process.env.VUE_APP_API_URL);
+        // console.log('API URL:', process.env.VUE_APP_API_URL);
 		try {
 			const response = await axios.get(`${process.env.VUE_APP_API_URL}/resumes`);
 			this.resumes = response.data;
