@@ -2,13 +2,15 @@
 	<div>
 		<h1>Resumes</h1>
 		<ul>
-			<li v-for="resume in resumes" :key="resume._id">
+			<li class="p-2 list-unstyled" v-for="resume in resumes" :key="resume._id">
 				{{ resume.name }}
-				<router-link :to="{ name: 'ViewResume', params: { id: resume._id } }">View</router-link>
-				<router-link :to="{ name: 'EditResume', params: { id: resume._id } }">Edit</router-link>
+				<router-link class="mx-3 btn btn-primary" :to="{ name: 'ViewResume', params: { id: resume._id } }"
+					>View</router-link
+				>
+				<router-link class="btn btn-secondary" :to="{ name: 'EditResume', params: { id: resume._id } }">Edit</router-link>
 			</li>
 		</ul>
-		<router-link to="/resume/create">Create New Resume</router-link>
+		<router-link class="btn btn-dark" to="/resume/create">Create New Resume</router-link>
 	</div>
 </template>
 
@@ -22,7 +24,7 @@ export default {
 		};
 	},
 	async created() {
-        // console.log('API URL:', process.env.VUE_APP_API_URL);
+		// console.log('API URL:', process.env.VUE_APP_API_URL);
 		try {
 			const response = await axios.get(`${process.env.VUE_APP_API_URL}/resumes`);
 			this.resumes = response.data;

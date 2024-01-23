@@ -1,38 +1,32 @@
 <template>
 	<div>
 		<h1>{{ id ? "Edit" : "Create" }} Resume</h1>
-		<form @submit.prevent="handleSubmit">
+		<form class="form-group" @submit.prevent="handleSubmit">
 			<label for="name">Name:</label>
-			<input id="name" v-model="resume.name" type="text" />
+			<input class="form-control my-2" id="name" v-model="resume.name" type="text" />
 
 			<label for="summary">Summary:</label>
-			<textarea id="summary" v-model="resume.summary"></textarea>
+			<textarea class="form-control my-2" id="summary" v-model="resume.summary"></textarea>
 
 			<div v-for="(exp, index) in resume.workExperience" :key="index">
+				<!-- TITLE -->
 				<label for="title">Job Title:</label>
-				<input id="title" v-model="exp.title" type="text" />
-				<!-- Error checking TITLE -->
-				<!-- <p
-					v-if="
-						errors.workExperience &&
-						errors.workExperience[index] &&
-						errors.workExperience[index].title
-					"
-				>
-					{{ errors.workExperience[index].title }}
-				</p> -->
+				<input class="form-control my-2" id="title" v-model="exp.title" type="text" />
 
+				<!-- COMPANY NAME -->
 				<label for="companyName">Company Name:</label>
-				<input id="companyName" v-model="exp.companyName" type="text" />
+				<input class="form-control my-2" id="companyName" v-model="exp.companyName" type="text" />
 
+				<!-- TIMEFRAME -->
 				<label for="timeframe">Timeframe:</label>
-				<input id="timeframe" v-model="exp.timeframe" type="text" />
+				<input class="form-control my-2" id="timeframe" v-model="exp.timeframe" type="text" />
 
+				<!-- DESCRIPTION -->
 				<label for="description">Description:</label>
-				<textarea id="description" v-model="exp.description"></textarea>
+				<textarea class="form-control my-2" id="description" v-model="exp.description"></textarea>
 			</div>
 
-			<button type="submit">{{ id ? "Update" : "Create" }}</button>
+			<button class="btn btn-dark btn-lg my-2" type="submit">{{ id ? "Update" : "Create" }}</button>
 		</form>
 	</div>
 </template>
