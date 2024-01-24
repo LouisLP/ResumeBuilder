@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<h1>Resume Details</h1>
+		<button class="btn btn-sm btn-secondary my-4" @click="printResume">Print</button>
 		<div v-if="resume">
 			<h2>{{ resume.name }}</h2>
 			<p>{{ resume.summary }}</p>
@@ -42,5 +42,10 @@ export default {
 			// Handle error appropriately
 		}
 	},
+	methods: {
+		printResume() {
+			window.print();
+		}
+	}
 };
 </script>
