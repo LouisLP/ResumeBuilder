@@ -1,6 +1,7 @@
 <template>
 	<div>
-		<h1>Resumes</h1>
+		<a href="https://github.com/LouisLP/ResumeBuilder"><h1 class="my-4">Resume Builder 🗃️</h1></a>
+		<h2 class="my-3">Resumes</h2>
 		<ul>
 			<li class="p-2 list-unstyled" v-for="resume in resumes" :key="resume._id">
 				<h3>{{ resume.name }}</h3>
