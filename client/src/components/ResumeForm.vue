@@ -110,6 +110,18 @@ export default {
 			this.resume.workExperience.splice(index, 1);
 		},
 		async handleSubmit() {
+			// Check if all required fields are filled
+			if (
+				!this.resume.name ||
+				!this.resume.summary ||
+				this.resume.workExperience.some(
+					(exp) => !exp.title || !exp.companyName || !exp.timeframe || !exp.description
+				)
+			) {
+				alert("Please fill all fields.");
+				return;
+			}
+
 			if (this.id) {
 				// Update logic
 				await axios.put(`${process.env.VUE_APP_API_URL}/resumes/${this.id}`, this.resume);
