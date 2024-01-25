@@ -1,8 +1,8 @@
 <template>
 	<div>
-		<a href="https://github.com/LouisLP/ResumeBuilder"><h1 class="">Resume Builder 🗃️</h1></a>
-		<p class="mb-4">Note: this is a simple prototype.</p>
-		<h2 class="my-3">Existing Resumes</h2>
+		<a href="https://github.com/LouisLP/ResumeBuilder"><h1 class="text-info">Resume Builder 🗃️</h1></a>
+		<p class="mb-4 text-light"> > Note: this is a simple prototype.</p>
+		<h2 class="my-2">Resumes</h2>
 		<ul>
 			<li class="p-2 list-unstyled" v-for="resume in resumes" :key="resume._id">
 				<h3>{{ resume.name }}</h3>
@@ -21,7 +21,7 @@
 				<button class="btn btn-danger" @click="deleteResume(resume._id)">Delete</button>
 			</li>
 		</ul>
-		<router-link class="btn btn-dark" to="/resume/create">Create New Resume</router-link>
+		<router-link class="btn btn-success" to="/resume/create">Create New Resume</router-link>
 	</div>
 </template>
 

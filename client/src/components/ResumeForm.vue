@@ -62,7 +62,7 @@
 
 			<!-- SUBMIT -->
 			<button
-				class="btn btn-dark btn-lg my-4 d-flex justify-content-center align-items-center"
+				class="btn btn-success btn-lg my-4 d-flex justify-content-center align-items-center"
 				type="submit"
 			>
 				{{ id ? "Update" : "Create" }}
