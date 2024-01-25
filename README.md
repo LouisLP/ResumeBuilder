@@ -4,19 +4,7 @@
 
 This full-stack application allows users to create, edit, and delete resumes. Resumes are stored in a MongoDB database and can be viewed in a formatted way.
 
-## Technologies Used
-
-- Docker
-- **Frontend**
-  - Vue.js
-  - Vuex
-  - Vue Router
-  - BootstrapVue
-- **Backend**
-  - Node.js
-  - Express
-  - Mongoose
-  - MongoDB
+---
 
 ## Setup Instructions
 
@@ -27,6 +15,8 @@ This full-stack application allows users to create, edit, and delete resumes. Re
 5. Change into the `client` directory and run `npm i`.
 6. Run `npm run serve` to start the client.
 7. Navigate to `localhost:8080` in your browser.
+
+---
 
 ## Walkthrough
 
@@ -59,3 +49,19 @@ Now that there is a resume in the list, you can choose to **view** it, **edit** 
 Viewing a resume will take you to a page that displays the resume in a formatted way. There is also a "print" button that will open a print dialog for the page.
 
 ![Resume Options](./client/screenshots/3-resume-viewing.png)
+
+---
+
+## Technologies Used
+
+- Docker
+- **Frontend**
+  - Vue.js
+  - Vuex
+  - Vue Router
+  - BootstrapVue
+- **Backend**
+  - Node.js
+  - Express
+  - Mongoose
+  - MongoDB
