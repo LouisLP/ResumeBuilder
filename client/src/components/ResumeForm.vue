@@ -71,66 +71,73 @@
 	</div>
 </template>
 
-<script>
+<script setup>
+/* eslint-disable */
 import axios from "axios";
+import { ref, onMounted } from "vue";
+import { useRouter } from 'vue-router';
 
-export default {
-	props: {
-		id: String,
-	},
-	data() {
-		return {
-			resume: {
-				name: "",
-				summary: "",
-				workExperience: [{ title: "", companyName: "", timeframe: "", description: "" }],
-			},
-		};
-	},
-	async created() {
-		if (this.id) {
-			try {
-				const response = await axios.get(`${process.env.VUE_APP_API_URL}/resumes/${this.id}`);
-				this.resume = response.data;
-			} catch (error) {
-				console.error("Error fetching resume:", error);
-			}
-		}
-	},
-	methods: {
-		addWorkExperience() {
-			this.resume.workExperience.push({
-				title: "",
-				companyName: "",
-				timeframe: "",
-				description: "",
-			});
-		},
-		removeWorkExperience(index) {
-			this.resume.workExperience.splice(index, 1);
-		},
-		async handleSubmit() {
-			// Check if all required fields are filled
-			if (
-				!this.resume.name ||
-				!this.resume.summary ||
-				this.resume.workExperience.some(
-					(exp) => !exp.title || !exp.companyName || !exp.timeframe || !exp.description
-				)
-			) {
-				alert("Please fill all fields.");
-				return;
-			}
+const router = useRouter();
 
-			if (this.id) {
-				// Update logic
-				await axios.put(`${process.env.VUE_APP_API_URL}/resumes/${this.id}`, this.resume);
-			} else {
-				// Create logic
-				await axios.post(`${process.env.VUE_APP_API_URL}/resumes`, this.resume);
-			}
-			this.$router.push("/");
-		},
-	},
+// PROPS
+const props = defineProps({
+	id: String,
+});
+
+// DATA
+const resume = ref({
+	name: "",
+	summary: "",
+	workExperience: [{ title: "", companyName: "", timeframe: "", description: "" }],
+});
+
+// METHODS
+function addWorkExperience() {
+	resume.value.workExperience.push({
+		title: "",
+		companyName: "",
+		timeframe: "",
+		description: "",
+	});
+}
+
+function removeWorkExperience(index) {
+	resume.value.workExperience.splice(index, 1);
+}
+
+const handleSubmit = async () => {
+	if (
+		!resume.value.name ||
+		!resume.value.summary ||
+		resume.value.workExperience.some(
+			(exp) => !exp.title || !exp.companyName || !exp.timeframe || !exp.description
+		)
+	) {
+		alert("Please fill out everything!");
+		return;
+	}
+
+	if (props.id) {
+		// Logic for UPDATING
+		await axios.put(`${process.env.VUE_APP_API_URL}/resumes/${props.id}`, resume.value);
+	} else {
+		// Create logic
+		await axios.post(`${process.env.VUE_APP_API_URL}/resumes`, resume.value);
+	}
+	router.push("/");
 };
+
+// CREATE/MOUNT
+async function fetchResume() {
+	try {
+		const response = await axios.get(`${process.env.VUE_APP_API_URL}/resumes/${props.id}`);
+		resume.value = response.data;
+	} catch (error) {
+		console.error("Error fetching resume:", error);
+		// Handle error appropriately
+	}
+}
+onMounted(() => {
+	fetchResume();
+});
 </script>

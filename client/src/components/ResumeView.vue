@@ -18,34 +18,37 @@
 	</div>
 </template>
 
-<script>
+<script setup>
+/* eslint-disable */
 import axios from "axios";
+import { ref, onMounted } from "vue";
 
-export default {
-	props: {
-		id: {
-			type: String,
-			required: true,
-		},
+// PROPS
+const props = defineProps({
+	id: {
+		type: String,
+		required: true,
 	},
-	data() {
-		return {
-			resume: null,
-		};
-	},
-	async created() {
-		try {
-			const response = await axios.get(`${process.env.VUE_APP_API_URL}/resumes/${this.id}`);
-			this.resume = response.data;
-		} catch (error) {
-			console.error("Error fetching resume:", error);
-			// Handle error appropriately
-		}
-	},
-	methods: {
-		printResume() {
-			window.print();
-		}
+});
+
+// DATA
+const resume = ref(null);
+
+// METHODS
+function printResume() {
+	window.print();
+}
+
+async function fetchResume() {
+	try {
+		const response = await axios.get(`${process.env.VUE_APP_API_URL}/resumes/${props.id}`);
+		resume.value = response.data;
+	} catch (error) {
+		console.error("Error fetching resume:", error);
+		// Handle error appropriately
 	}
-};
+}
+onMounted(() => {
+	fetchResume();
+});
 </script>
